@@ -1,0 +1,201 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    border: 3px solid red;
+}
+
+.first{
+    width: 30%;
+    height: 100%;
+    border: 3px solid green;
+}
+
+.haut{
+    width: 100%;
+    height: 50%;
+    border: 3px solid gold;
+
+}
+
+.bas{
+    width: 100%;
+    height: 50%;
+    border: 3px solid red;
+}
+
+.chart{
+    width: 200px; 
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding-top: 70px;
+}
+
+.second{
+    width: 70%;
+    height: 100%;
+    display: block;
+    border: 3px solid yellow;
+}
+
+.un{
+    width: 100%;
+    height: 70%;
+}
+
+.deux{
+    border: 3px solid blueviolet;
+    width: 100%;
+    height: 30%;
+}
+
+.uno{
+    width: 100%;
+    height: 5%;
+}
+
+.dos{
+    width: 100%;
+    height: 75%;
+    margin: 13px 0;
+    padding: 0;
+    border: 3px solid #5F9EA0;
+}
+
+.table{
+    width: 100%;
+    height: 100%;   
+}
+
+
+.table thead{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: rgb(105, 106, 169);
+    border: 3px solid red;
+}
+
+th{
+    color: #fff;
+    background: #5F9EA0;
+    border: yellowgreen;
+    padding: 10px;
+}
+
+.ajout{
+    width: 95%;
+    height: 30px;
+    margin-left: 10px;
+    background: #5F9EA0;
+    border-radius: 5px;
+    border: 2px solid #5F9EA0;
+    color: white;
+    font-size: 1rem;
+}
+
+
+
+#ajouter{
+    width: 95%;
+    height: 30px;
+    margin-left: 10px;
+    background: #5F9EA0;
+    border-radius: 5px;
+    border: 2px solid #5F9EA0;
+    color: white;
+    font-size: 1rem;
+}
+
+#ajouter:hover {
+    background-color: #fff;
+    color: #5F9EA0;
+    cursor: pointer; 
+}
+
+input{
+    width: 90%;
+    height: 10px;
+    display: block;
+    margin: 10px;
+    padding: 10px;
+}
+
+#Description{
+    width: 90%;
+    height: 10px;
+    display: block;
+    margin: 10px;
+    padding: 10px;
+}
+
+p{
+    text-align: center;
+    font-size: 20px;
+    color: #5F9EA0;
+}
+
+#conteneurAlerte {
+    position: absolute;
+    border: 2px solid red;
+    top: 30%;
+    left: 60%;
+}
+
+#titreAlerte{
+    background: #5F9EA0;
+    color: #fff;
+}
+
+#messageAlerte{
+    background: white;
+    color: black;
+}
+
+.vue-detail{
+    position: absolute;
+    display: none;
+}
+
+.vue-detail.active{
+    display: block;
+}
+
+.btn-vue{
+    width: 30px;
+    height: 30px;
+    margin: 3px;
+    background: #79D0FF;
+    border-radius: 4px;
+    border: none;
+}
+
+.btn-edit{
+    width: 30px;
+    height: 30px;
+    margin: 3px;
+    background: #07FFCF;
+    border-radius: 4px;
+    border: none;
+}
+
+.btn-supprimer{
+    width: 30px;
+    height: 30px;
+    background: #FF4647;
+    border-radius: 4px;
+    border: none;
+}

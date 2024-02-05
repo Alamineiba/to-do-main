@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="do.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="first">
+        <div class="haut">
+          <button class="ajout">Ajouter Tache</button>
+          <input  type="text"  list="choix"  id="selection" placeholder="Catégorie"
+          />
+          <datalist id="choix">
+            <option value="Academique"></option>
+            <option value="Extra-Academique"></option>
+            <option value="Distraction"></option>
+          </datalist>
+          <input type="text" placeholder="Titre" />
+          <input type="date" />
+          <textarea placeholder="Description" id="Description"></textarea>
+          <input type="text" list="niveau" id="types" placeholder="Statut" />
+          <datalist id="niveau">
+            <option value="Nouveau"></option>
+            <option value="En cours"></option>
+            <option value="Terminer"></option>
+          </datalist>
+          <button id="ajouter">Ajouter</button>
+        </div>
+        <div class="bas">
+          <div class="chart">
+            <canvas id="beignetChart"></canvas>
+          </div>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        </div>
+      </div>
+
+      <div class="second">
+        <div class="un">
+          <p>Listes des taches</p>
+          <div class="tab">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Titre</th>
+                  <th scope="col">Categorie</th>
+                  <th scope="col">Operation</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="deux">
+          <div class="uno">
+            <p>Description</p>
+          </div>
+          <div class="dos"></div>
+        </div>
+      </div>
+
+      <!-- Div contenant l'alerte et le reste du contenu -->
+    <div id="conteneurAlerte">
+      <!-- Elements pour afficher l'alerte -->
+      <h1 id="titreAlerte"></h1>
+      <p id="messageAlerte"></p>
+    </div>
+
+    </div>
+
+    
+    <script src="do.js"></script>
+  </body>
+</html>
+
+
