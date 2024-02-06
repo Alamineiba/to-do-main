@@ -34,62 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function ajouterTacheAuTableau(tache) {
-      var tbody = document.querySelector('.table tbody') || document.querySelector('.table');
-      var newRow = tbody.insertRow();
-
-      var cellNum = newRow.insertCell(0);
-      cellNum.innerHTML = tbody.children.length;
-
-      var cellDate = newRow.insertCell(1);
-      cellDate.innerHTML = tache.date;
-
-      var cellTitre = newRow.insertCell(2);
-      cellTitre.innerHTML = tache.titre;
-
-      var cellCategorie = newRow.insertCell(3);
-      cellCategorie.innerHTML = tache.categorie;
-
-      var cellSupprimer = newRow.insertCell(4);
-      cellSupprimer.innerHTML = '<button onclick="supprimerTache(this)">Supprimer</button>';
-
-      var divDosListe = document.getElementsByClassName('dos');
-      if (divDosListe.length > 0) {
-          var divDos = divDosListe[0];
-          divDos.innerHTML = `${tache.description}`;
-      }
-
-      mettreAJourChart();
-
-          // Ajout de l'alerte
-    alert('Enregistrement réussi avec success');
-
-  }
-
-  const ajout = document.getElementById('ajouter');
-  ajout.addEventListener('click', function() {
-      const categorie = document.getElementById('selection').value;
-      const titre = document.querySelector('input[placeholder="Titre"]').value;
-      const date = document.querySelector('input[type="date"]').value;
-      const description = document.querySelector('textarea[placeholder="Description"]').value;
-      const statut = document.getElementById('types').value;
-
-      const nouvelleTache = {
-          categorie,
-          titre,
-          date,
-          description,
-          statut
-      };
-
-      ajouterTacheAuTableau(nouvelleTache);
-
-      document.querySelector('input[placeholder="Titre"]').value = '';
-      document.querySelector('input[type="date"]').value = '';
-      document.querySelector('textarea[placeholder="Description"]').value = '';
-      document.getElementById('types').value = '';
-  });
-
-  function ajouterTacheAuTableau(tache) {
     var tbody = document.querySelector('.table tbody') || document.querySelector('.table');
     var newRow = tbody.insertRow();
 
@@ -122,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var divDosListe = document.getElementsByClassName('dos');
     if (divDosListe.length > 0) {
         var divDos = divDosListe[0];
-        divDos.innerHTML = `${tache.description}`;
+        divDos.innerHTML = tache.description;
     }
 
     mettreAJourChart();
@@ -132,10 +76,68 @@ document.addEventListener('DOMContentLoaded', function() {
         supprimerTache(newRow);
     });
 
-    
+   // Suppose que le bouton avec la classe 'btn-vue' est déjà créé
+    var vueButton = document.querySelector('.btn-vue');
 
-   // Fonction pour afficher l'alerte dans la div
-   function afficherAlerte(titre, message) {
+    // Vérifiez si le bouton existe avant d'ajouter l'événement
+    if (vueButton) {
+      // Ajout de l'événement click pour afficher les détails de la tâche
+      vueButton.addEventListener('click', function() {
+        afficherDetailsTache(newRow, tache);
+      });
+    }
+  }
+
+  const ajout = document.getElementById('ajouter');
+  ajout.addEventListener('click', function() {
+      const categorie = document.getElementById('selection').value;
+      const titre = document.querySelector('input[placeholder="Titre"]').value;
+      const date = document.querySelector('input[type="date"]').value;
+      const description = document.querySelector('textarea[placeholder="Description"]').value;
+      const statut = document.getElementById('types').value;
+
+      const nouvelleTache = {
+          categorie,
+          titre,
+          date,
+          description,
+          statut
+      };
+
+      ajouterTacheAuTableau(nouvelleTache);
+
+      document.querySelector('input[placeholder="Titre"]').value = '';
+      document.querySelector('input[type="date"]').value = '';
+      document.querySelector('textarea[placeholder="Description"]').value = '';
+      document.getElementById('types').value = '';
+  });
+
+  function afficherDetailsTache(row, formValues) {
+    var titre = formValues.titre || 'N/A';
+    var date = formValues.date || 'N/A';
+    var categorie = formValues.categorie || 'N/A';
+    var description = formValues.description || 'N/A';
+    var statut = formValues.statut || 'N/A';
+
+    // Modifier le contenu de la div pour afficher les détails
+    var infoDetailDiv = document.getElementById('infoDetail');
+    infoDetailDiv.innerHTML = `
+      <h2>Détails de la tâche</h2>
+      <p><strong>Date:</strong> ${date}</p>
+      <p><strong>Titre:</strong> ${titre}</p>
+      <p><strong>Catégorie:</strong> ${categorie}</p>
+      <p><strong>Description:</strong> ${description}</p>
+      <p><strong>Statut:</strong> ${statut}</p>
+    `;
+  }
+
+  function supprimerTache(row) {
+    row.remove();
+    mettreAJourChart();
+  }
+
+  // Fonction pour afficher l'alerte dans la div
+  function afficherAlerte(titre, message) {
     var titreAlerte = document.getElementById('titreAlerte');
     var messageAlerte = document.getElementById('messageAlerte');
     var conteneurAlerte = document.getElementById('conteneurAlerte');
@@ -149,18 +151,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Exemple d'utilisation
   afficherAlerte('Ajout de la tâche', 'L\'enregistrement s\'est effectué avec succès.');
-}
-
-// Fonction pour supprimer une tâche en fonction de la ligne du tableau
-function supprimerTache(row) {
-    row.remove();
-    mettreAJourChart();
-}
-
 });
-
-
-btn-vue.addEventListener('click', ()=> {
-  body.innerHTML = `<div class="vue-detail"></div>`
-  vue-detail.classList.add("active");
-})

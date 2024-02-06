@@ -156,6 +156,9 @@ p{
 }
 
 #titreAlerte{
+    display: flex;
+    justify-content: center;
+    text-align: center;
     background: #5F9EA0;
     color: #fff;
 }
@@ -199,3 +202,17 @@ p{
     border-radius: 4px;
     border: none;
 }
+
+/* Styles pour l'alerte de détail de la tâche */
+.detail-alert {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    background-color: #f8d7da; /* Couleur de fond */
+    color: #721c24; /* Couleur du texte */
+    padding: 15px; /* Espacement intérieur */
+    border: 1px solid #f5c6cb; /* Bordure */
+    border-radius: 5px; /* Coins arrondis */
+    margin-top: 10px; /* Marge supérieure */
+  }
+  
