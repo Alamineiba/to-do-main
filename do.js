@@ -49,6 +49,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var cellCategorie = newRow.insertCell(3);
     cellCategorie.innerHTML = tache.categorie;
 
+    /* var cellStatut = newRow.insertCell(4);
+    cellStatut.innerHTML = tache.statut;
+  
+    var cellSupprimer = newRow.insertCell(5); */
+
     var cellSupprimer = newRow.insertCell(4);
     var deleteButton = document.createElement('button');
     var editButton = document.createElement('button');
@@ -70,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     mettreAJourChart();
+    enregistrerTaches(); //Enregistrer la tâche dans le localStorage
 
     // Ajout de l'événement click pour supprimer la tâche
     deleteButton.addEventListener('click', function() {
@@ -145,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function supprimerTache(row) {
     row.remove();
     mettreAJourChart();
+    chargerTaches(); // Charger les tâches précédemment enregistrées
   }
 
   // fonction pour afficher l'alerte dans la div
@@ -166,3 +173,33 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 });
+
+function enregistrerTaches() {
+  const tableauTaches = Array.from(document.querySelectorAll('.table tbody tr')).map(tr => {
+    const tache = {
+      num: tr.children[0].textContent,
+      date: tr.children[1].textContent,
+      titre: tr.children[2].textContent,
+      categorie: tr.children[3].textContent,
+      description: document.querySelector('.dos').textContent,
+      statut: document.getElementById('types').value
+    };
+    return tache;
+  });
+  localStorage.setItem("taches", JSON.stringify(tableauTaches));
+}
+
+function chargerTaches() {
+  const tachesEnregistrees = localStorage.getItem("taches");
+  if (tachesEnregistrees) {
+    const tableauTaches = JSON.parse(tachesEnregistrees);
+    tableauTaches.forEach(tache => {
+      const newRow = document.createElement('tr');
+      // ...
+      // Ajouter les cellules et le contenu de chaque tâche
+      // ...
+      tbody.appendChild(newRow);
+    });
+    mettreAJourChart();
+  }
+}
