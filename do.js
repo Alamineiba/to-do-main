@@ -66,26 +66,29 @@ document.addEventListener('DOMContentLoaded', function() {
     var divDosListe = document.getElementsByClassName('dos');
     if (divDosListe.length > 0) {
         var divDos = divDosListe[0];
-        divDos.innerHTML = tache.description;
+        divDos.innerHTML = `${tache.description}`;
     }
 
     mettreAJourChart();
 
-    // Ajoutez un gestionnaire d'événements pour le bouton supprimer
+    // Ajout de l'événement click pour supprimer la tâche
     deleteButton.addEventListener('click', function() {
         supprimerTache(newRow);
     });
 
-   // Suppose que le bouton avec la classe 'btn-vue' est déjà créé
-    var vueButton = document.querySelector('.btn-vue');
+    // Ajout de l'événement click pour afficher les détails de la tâche
+    vueButton.addEventListener('click', function() {
+      var  infoDetailDiv = document.getElementById('infoDetail');
+      afficherDetailsTache(newRow, tache);
+      if (infoDetailDiv.style.display === "none") {
+        infoDetailDiv.style.display = "block";
+      } else {
+        infoDetailDiv.style.display = "none";
+      }
+    });
 
-    // Vérifiez si le bouton existe avant d'ajouter l'événement
-    if (vueButton) {
-      // Ajout de l'événement click pour afficher les détails de la tâche
-      vueButton.addEventListener('click', function() {
-        afficherDetailsTache(newRow, tache);
-      });
-    }
+   
+
   }
 
   const ajout = document.getElementById('ajouter');
@@ -110,14 +113,18 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelector('input[type="date"]').value = '';
       document.querySelector('textarea[placeholder="Description"]').value = '';
       document.getElementById('types').value = '';
+
+      // appeler la fonction afficherAlerte 
+      afficherAlerte("Ajout de la tache", "Enregistrement réussit");
   });
 
-  function afficherDetailsTache(row, formValues) {
-    var titre = formValues.titre || 'N/A';
-    var date = formValues.date || 'N/A';
-    var categorie = formValues.categorie || 'N/A';
-    var description = formValues.description || 'N/A';
-    var statut = formValues.statut || 'N/A';
+  // Fonction pour afficher les détails d'une tâche
+  function afficherDetailsTache(row, tache) {
+    var titre = tache.titre || 'N/A';
+    var date = tache.date || 'N/A';
+    var categorie = tache.categorie || 'N/A';
+    var description = tache.description || 'N/A';
+    var statut = tache.statut || 'N/A';
 
     // Modifier le contenu de la div pour afficher les détails
     var infoDetailDiv = document.getElementById('infoDetail');
@@ -129,14 +136,18 @@ document.addEventListener('DOMContentLoaded', function() {
       <p><strong>Description:</strong> ${description}</p>
       <p><strong>Statut:</strong> ${statut}</p>
     `;
+
+    
+
   }
 
+  // Fonction pour supprimer une tâche en fonction de la ligne du tableau
   function supprimerTache(row) {
     row.remove();
     mettreAJourChart();
   }
 
-  // Fonction pour afficher l'alerte dans la div
+  // fonction pour afficher l'alerte dans la div
   function afficherAlerte(titre, message) {
     var titreAlerte = document.getElementById('titreAlerte');
     var messageAlerte = document.getElementById('messageAlerte');
@@ -145,10 +156,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (titreAlerte && messageAlerte && conteneurAlerte) {
       titreAlerte.innerHTML = titre;
       messageAlerte.innerHTML = message;
-      //conteneurAlerte.style.display = 'flex';
     }
+
+    // Cacher la div d'alerte après 3 secondes
+    setTimeout(function() {
+      conteneurAlerte.style.display = 'none';
+    }, 3000);
+
   }
 
-  // Exemple d'utilisation
-  afficherAlerte('Ajout de la tâche', 'L\'enregistrement s\'est effectué avec succès.');
 });
